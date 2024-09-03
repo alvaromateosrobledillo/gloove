@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const ResponsiveSection: React.FC = () => {
-  const [videoSrc, setVideoSrc] = useState("/public/colaboradores/RuletaM.mp4");
+  const [videoSrc, setVideoSrc] = useState("/dist/colaboradores/RuletaM.mp4");
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   useEffect(() => {
     const updateVideoSrc = () => {
       const width = window.innerWidth;
       if (width >= 1920) {
-        setVideoSrc("./colaboradores/RuletaO2.mp4"); // Monitores grandes
+        setVideoSrc("/dist/colaboradores/RuletaO2.mp4"); // Monitores grandes
         setIsLargeScreen(true);
       } else if (width >= 1024) {
-        setVideoSrc("./colaboradores/RuletaO2.mp4"); // PC
+        setVideoSrc("/dist/colaboradores/RuletaO2.mp4"); // PC
         setIsLargeScreen(true);
       } else if (width >= 768) {
-        setVideoSrc("./colaboradores/RuletaT.mp4"); // Tablets
+        setVideoSrc("/dist/colaboradores/RuletaT.mp4"); // Tablets
         setIsLargeScreen(false);
       } else {
-        setVideoSrc("./colaboradores/RuletaM.mp4"); // Móviles
+        setVideoSrc("/dist/colaboradores/RuletaM.mp4"); // Móviles
         setIsLargeScreen(false);
       }
     };
