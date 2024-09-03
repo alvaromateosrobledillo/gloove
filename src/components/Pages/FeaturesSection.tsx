@@ -1,16 +1,9 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
-import {
-  FaHotel,
-  FaUserTie,
-  FaBuilding,
-  FaStar,
-  FaHandPointRight,
-} from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Parallax } from "react-parallax"; // Importamos el componente Parallax
+import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -44,88 +37,30 @@ const cardDetails = [
   "Ofrecemos consultoría estratégica para ayudar a los propietarios a tomar decisiones informadas y planificar el futuro.",
 ];
 
-const icons = [FaBuilding, FaUserTie, FaBuilding, FaHotel, FaStar, FaStar];
-
-type CardProps = {
-  title: string;
-  details: string;
-  imageUrl: string;
-  icon: React.ElementType;
-};
-
-const Card: React.FC<CardProps> = ({
+const Card: React.FC<{ title: string; details: string; imageUrl: string }> = ({
   title,
   details,
   imageUrl,
-  icon: Icon,
 }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   return (
-    <motion.div
-      ref={ref}
-      className="relative flex flex-col justify-between cursor-pointer rounded-[20px] shadow-lg transition-all duration-500 ease-in-out mx-auto overflow-hidden"
-      style={{
-        width: "85%",
-        maxWidth: "360px",
-        height: "auto",
-        minHeight: "400px",
-      }}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 50 }}
-      exit={{ opacity: 0, y: 50 }}
-      whileHover={{ scale: 1.05 }}
-    >
-      {/* Imagen de fondo con blur */}
-      <div
-        className="absolute inset-0 bg-cover bg-center filter blur-lg"
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-        }}
-      ></div>
-
-      {/* Overlay para oscurecer un poco la imagen de fondo */}
-      <div className="absolute inset-0 bg-gray-900 bg-opacity-60 rounded-[20px]"></div>
-
-      {/* Contenido de la tarjeta */}
-      <div className="relative z-10 p-4 md:p-6 bg-gray-800 bg-opacity-80 rounded-t-[20px] flex flex-col justify-center">
-        <Icon className="text-glooveAccent text-3xl md:text-4xl mb-2" />
-        <h2 className="text-lg md:text-2xl font-extrabold text-white uppercase mb-2">
-          {title}
-        </h2>
-        <p className="text-xs md:text-sm text-gray-300 mb-4">{details}</p>
+    <div className="relative bg-white rounded-[20px] shadow-lg overflow-hidden w-[280px] md:w-[320px] lg:w-[360px] mx-auto md:mx-2 p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+      {/* Imagen con efecto 3D */}
+      <div className="relative mb-6">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-[70%] mx-auto h-[100px] md:h-[120px] lg:h-[140px] object-cover rounded-[15px] transition-transform duration-500"
+        />
       </div>
 
-      {/* Imagen 3D más pequeña y bien posicionada */}
-      <img
-        src={imageUrl}
-        alt="Imagen 3D"
-        className="relative z-20 mx-auto mb-2 w-20 h-20 md:w-28 md:h-28 transform -rotate-6 shadow-lg"
-      />
-    </motion.div>
+      {/* Título y detalles */}
+      <div className="text-center">
+        <h2 className="text-xl font-bold text-gray-800 mb-3">{title}</h2>
+        <p className="text-sm text-gray-600">{details}</p>
+      </div>
+    </div>
   );
 };
-
-// Componente de la animación de la mano
-const HandAnimation: React.FC = () => (
-  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-    <motion.div
-      className="w-10 h-10 text-gloovePrimary-dark"
-      initial={{ x: 0 }}
-      animate={{ x: [10, -10, 10] }}
-      transition={{
-        repeat: Infinity,
-        repeatType: "mirror",
-        duration: 1.5,
-      }}
-    >
-      <FaHandPointRight className="w-full h-full" />
-    </motion.div>
-  </div>
-);
 
 const FeaturesSection: React.FC = () => {
   const { ref: titleRef, inView: titleInView } = useInView({
@@ -134,55 +69,79 @@ const FeaturesSection: React.FC = () => {
   });
 
   return (
-    <Parallax
-      bgImage="/path-to-your-background-image.jpg" // Puedes usar una imagen si lo deseas
-      strength={200}
-      bgImageAlt="the background"
-      bgStyle={{ backgroundColor: "#F6F7F5" }} // Color de fondo con efecto parallax
-    >
-      <section className="py-16 min-h-screen flex items-center justify-center relative">
-        <div className="w-full max-w-[1400px] mx-auto">
-          <div ref={titleRef} className="text-center mb-12 px-4">
-            <motion.h1
-              className="text-3xl md:text-5xl font-extrabold text-gloovePrimary-dark mb-4"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{
-                opacity: titleInView ? 1 : 0,
-                y: titleInView ? 0 : -50,
-              }}
-            >
-              Características de Nuestra Empresa
-            </motion.h1>
-            <motion.p
-              className="text-lg md:text-xl text-glooveSecondary-dark"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{
-                opacity: titleInView ? 1 : 0,
-                y: titleInView ? 0 : -50,
-              }}
-            >
-              Conoce más sobre lo que nos hace especiales.
-            </motion.p>
-          </div>
+    <section className="bg-[#F4F7F5] min-h-screen flex flex-col items-center justify-center">
+      <div className="w-full max-w-[1400px] mx-auto flex flex-col md:flex-row md:justify-between items-center">
+        {/* Texto a la izquierda */}
+        <div
+          ref={titleRef}
+          className="text-center md:text-left mb-12 md:mb-0 md:mr-8 px-4 md:flex-1"
+        >
+          <motion.h1
+            className="text-3xl md:text-5xl font-bold text-gloovePrimary-dark mb-4"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{
+              opacity: titleInView ? 1 : 0,
+              y: titleInView ? 0 : -50,
+            }}
+          >
+            Características de Nuestra Empresa
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-gray-700"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{
+              opacity: titleInView ? 1 : 0,
+              y: titleInView ? 0 : -50,
+            }}
+          >
+            Conoce más sobre lo que nos hace especiales.
+          </motion.p>
+        </div>
+
+        {/* Carrusel a la derecha */}
+        <div className="w-full md:flex-1">
           <Swiper
             effect="coverflow"
             grabCursor
             centeredSlides
-            slidesPerView={1}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 0,
-              modifier: 0,
-              slideShadows: false,
-            }}
-            spaceBetween={0}
+            initialSlide={2} // Mostrar la tercera card de manera predefinida
+            spaceBetween={20} // Espacio entre las cards aumentado
             pagination={{
               clickable: true,
               el: ".swiper-pagination",
               type: "bullets",
             }}
-            autoplay={{ delay: 5000 }}
+            autoplay={{
+              delay: 3000, // Tiempo entre cambios automáticos (3 segundos)
+              disableOnInteraction: false, // No detener autoplay al interactuar con el carrusel
+            }}
+            coverflowEffect={{
+              rotate: 3, // Rotación muy ligera
+              stretch: 0, // No estiramiento entre las cards
+              depth: 60, // Profundidad ligera para un efecto 3D sutil
+              modifier: 1,
+              slideShadows: false, // Sin sombras para mantener el efecto limpio
+            }}
+            breakpoints={{
+              320: {
+                slidesPerView: 1, // Mostrar una card en dispositivos móviles pequeños
+              },
+              640: {
+                slidesPerView: 1, // Mostrar una card en móviles
+              },
+              768: {
+                slidesPerView: 2, // Dos cards en tablets
+              },
+              1024: {
+                slidesPerView: 3, // Tres cards en pantallas grandes
+              },
+              1440: {
+                slidesPerView: 3, // Cuatro cards en pantallas más grandes
+              },
+              1920: {
+                slidesPerView: 3, // Cinco cards en pantallas aún más grandes
+              },
+            }}
             modules={[EffectCoverflow, Pagination, Autoplay]}
             className="swiper_container"
           >
@@ -192,17 +151,36 @@ const FeaturesSection: React.FC = () => {
                   title={title}
                   details={cardDetails[index]}
                   imageUrl={cardImages[index]}
-                  icon={icons[index]}
                 />
               </SwiperSlide>
             ))}
             <div className="swiper-pagination swiper-pagination-bullets"></div>
           </Swiper>
-          {/* Añadir animación de mano en la pantalla móvil */}
-          <HandAnimation />
         </div>
-      </section>
-    </Parallax>
+      </div>
+
+      {/* Iconos separados al final */}
+      <div className="mt-12 flex justify-center space-x-6">
+        <a
+          href="#"
+          className="text-gray-700 hover:text-gray-900 transition-colors"
+        >
+          <FaFacebookF size={24} />
+        </a>
+        <a
+          href="#"
+          className="text-gray-700 hover:text-gray-900 transition-colors"
+        >
+          <FaTwitter size={24} />
+        </a>
+        <a
+          href="#"
+          className="text-gray-700 hover:text-gray-900 transition-colors"
+        >
+          <FaInstagram size={24} />
+        </a>
+      </div>
+    </section>
   );
 };
 

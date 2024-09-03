@@ -276,7 +276,7 @@ const Header = () => {
                 smooth={true}
                 offset={-70}
                 duration={500}
-                className="w-full flex items-center justify-center text-gloovePrimary dark:text-white hover:text-gloovePrimary-dark dark:hover:text-gloovePrimary-light transition duration-300 py-4 text-lg uppercase transform hover:scale-105"
+                className="w-full flex items-center justify-center text-glooveSecondary dark:text-white hover:text-gloovePrimary-dark dark:hover:text-gloovePrimary-light transition duration-300 py-4 text-lg uppercase transform hover:scale-105"
                 onClick={() => setMenuOpen(false)}
               >
                 <motion.div

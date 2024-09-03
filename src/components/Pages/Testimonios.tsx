@@ -1,98 +1,92 @@
 import React from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/splide/dist/css/splide.min.css";
 import { FaStar } from "react-icons/fa";
-import Quote from "/RecursosWeb/img/blockquote.svg";
+import { motion } from "framer-motion";
 
-const reviews = [
+const testimonials = [
   {
     id: 1,
+    name: "María López",
     image:
-      "https://images.unsplash.com/photo-1605462863863-10d9e47e15ee?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    name: "Veronika771 G. M.",
-    text: `Alojamiento Calas Beach Santa Pola, estancia del 23 al 26 de diciembre. Dos adultos y un perro.
-    Las indicaciones para encontrar la vivienda fueron perfectas. El apartamento estaba limpio y bien dotado de los elementos necesarios para una estancia cómoda, con todo en perfecto funcionamiento.
-    Las vistas al mar desde la terraza en plenas navidades fueron de lo más reconfortante para nosotros. Relación calidad-precio para tres noches en Navidad (291 euros) me pareció correcto.`,
+      "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080",
+    rating: 5,
+    testimonial:
+      "Gloove ha hecho que la gestión de mi propiedad sea más eficiente y rentable. El servicio es excelente y siempre están disponibles para ayudar.",
   },
   {
     id: 2,
+    name: "José García",
     image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    name: "Ana Maria Craciun",
-    text: `El personal es encantador, siempre dispuesto a ayudar y a brindar confort y comodidad al huésped. La decoración es de muy buen gusto y la higiene es impecable. Muy recomendable, sin duda volveremos.`,
+      "https://images.unsplash.com/photo-1552058544-f2b08422138a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080",
+    rating: 4,
+    testimonial:
+      "Desde que trabajo con Gloove, mis ingresos han aumentado significativamente. La plataforma es fácil de usar y muy efectiva.",
+  },
+  {
+    id: 3,
+    name: "Carlos Martinez",
+    image:
+      "https://images.unsplash.com/photo-1605462863863-10d9e47e15ee?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    rating: 5,
+    testimonial:
+      "Gloove ha transformado mi forma de aprender. Los cursos son excepcionales y el soporte es inmejorable.",
   },
 ];
 
-const Testimonials = () => {
+const handleScrollToContact = () => {
+  console.log("Scrolling to contact section...");
+};
+
+const LearningSection = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-[#F6F7F5] to-[#E8E9E7] px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl md:text-6xl font-extrabold text-gloovePrimary-dark mb-6">
-          Testimonios
-        </h2>
-        <p className="text-lg md:text-xl text-glooveSecondary-dark mb-12">
-          Lo que nuestros clientes dicen sobre nosotros.
-        </p>
+    <section className="flex flex-col-reverse lg:flex-row items-center justify-between py-20 bg-gradient-to-r from-[#F6F7F5] to-[#E8E9E7] px-4 sm:px-6 lg:px-[10%] min-h-screen">
+      {/* Tarjetas de testimonios a la izquierda en pantallas grandes */}
+      <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row lg:w-2/3">
+        {testimonials.map((testimonial) => (
+          <div
+            key={testimonial.id}
+            className="relative flex-shrink-0 w-full lg:w-full rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 bg-white"
+          >
+            <img
+              src={testimonial.image}
+              alt={testimonial.name}
+              className="w-full h-80 object-cover lg:h-auto"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col justify-end text-white">
+              <h3 className="text-xl font-semibold">{testimonial.name}</h3>
+              <div className="flex items-center mt-2">
+                {[...Array(testimonial.rating)].map((_, index) => (
+                  <FaStar key={index} className="text-yellow-500 mr-1" />
+                ))}
+              </div>
+              <p className="text-sm mt-2 italic">"{testimonial.testimonial}"</p>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="relative">
-        <Splide
-          options={{
-            perPage: 1,
-            autoplay: true,
-            interval: 4000, // Intervalo de 4 segundos entre los testimonios
-            speed: 800, // Velocidad de transición ajustada a 0.8 segundos
-            rewind: true,
-            rewindByDrag: true,
-            arrows: false,
-            pagination: true,
-            type: "loop",
-            gap: "2rem",
-            breakpoints: {
-              640: {
-                gap: "1rem",
-              },
-            },
+      {/* Texto a la derecha en pantallas grandes */}
+      <div className="text-center lg:text-left lg:w-1/3 mb-12 lg:mb-0">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-gloovePrimary-dark mb-6">
+          Nuestros Clientes <br />
+          Confían en Nosotros.
+        </h2>
+        <p className="text-lg text-glooveSecondary-dark mb-6">
+          Descubre lo que nuestros clientes opinan sobre nuestros servicios de
+          gestión turística.
+        </p>
+        <motion.button
+          whileHover={{
+            scale: 1.2,
+            boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)",
           }}
+          className="mt-8 bg-gradient-to-r from-gloovePrimary via-gloovePrimary-dark to-glooveAccent text-white font-bold py-4 px-10 rounded-full transition duration-300 hover:scale-105 animate-pulse"
+          onClick={handleScrollToContact}
         >
-          {reviews.map((review) => (
-            <SplideSlide
-              key={review.id}
-              className="flex flex-col items-center text-center"
-            >
-              <div className="relative">
-                <img
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-white shadow-lg"
-                  src={review.image}
-                  alt={review.name}
-                />
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gloovePrimary-dark rounded-full flex items-center justify-center">
-                  <img
-                    className="w-4 h-4 transform rotate-180"
-                    src={Quote}
-                    alt="quote"
-                  />
-                </div>
-              </div>
-              <div className="bg-white shadow-xl rounded-lg p-8 mt-6 w-full max-w-2xl transition-transform transform hover:scale-105">
-                <p className="text-gray-700 text-lg md:text-xl mb-6 leading-relaxed">
-                  "{review.text}"
-                </p>
-                <p className="text-gray-600 text-base md:text-lg font-semibold">
-                  {review.name}
-                </p>
-                <div className="flex justify-center text-yellow-500 mt-4">
-                  {[...Array(5)].map((_, index) => (
-                    <FaStar key={index} size={20} />
-                  ))}
-                </div>
-              </div>
-            </SplideSlide>
-          ))}
-        </Splide>
+          DESCUBRE MÁS
+        </motion.button>
       </div>
     </section>
   );
 };
 
-export default Testimonials;
+export default LearningSection;

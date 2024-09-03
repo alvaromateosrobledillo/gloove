@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Element } from "react-scroll";
 import Loader from "./Loader";
 import Testimonials from "./Testimonios";
+import ResponsiveSection from "./ResponsiveSection";
 
 // Carga diferida de los componentes menos críticos
 const Header = React.lazy(() => import("./Header"));
@@ -55,31 +56,9 @@ const Home: React.FC = () => {
               <ServicesSection />
             </Element>
 
-            <motion.section
-              id="nosotros"
-              className="min-h-screen py-16 relative"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-            >
-              <video
-                className="absolute inset-0 w-full h-full object-cover hidden md:block"
-                src="/RecursosWeb/vid/grabacion_grande.mov"
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-              <video
-                className="absolute inset-0 w-full h-full object-cover md:hidden"
-                src="/RecursosWeb/vid/sm6.mov"
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-              <div className="relative z-10"></div>
-            </motion.section>
+            <Element name="nosotros">
+              <ResponsiveSection />
+            </Element>
             <Element name="nosotros">
               <motion.section
                 initial={{ opacity: 0, y: 50 }}

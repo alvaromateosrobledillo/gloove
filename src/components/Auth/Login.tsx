@@ -137,7 +137,7 @@ const Login: React.FC = () => {
             </div>
             <div className="w-full p-8 md:w-1/2 flex flex-col items-center">
               <img
-                src="/gloove_marca.png"
+                src="/RecursosWeb/img/Logo/Logo-Gloove.webp"
                 alt="Logo de Gloove"
                 className="login-logo"
               />

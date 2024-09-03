@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TypingEffect from "react-typing-effect";
 
 const Hero: React.FC = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
   const handleScrollToContact = () => {
     const contactSection = document.getElementById("contacto");
     if (contactSection) {
@@ -11,24 +13,24 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="inicio" className="relative h-screen overflow-hidden">
-      <motion.div
-        className="absolute inset-0 z-0"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2 }}
+    <section
+      id="inicio"
+      className="relative h-screen overflow-hidden bg-center bg-cover bg-no-repeat"
+      style={{ backgroundImage: "url('/RecursosWeb/img/hotel.png')" }}
+    >
+      {/* Video de fondo, visible solo cuando está listo para reproducirse */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+          videoLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        onCanPlayThrough={() => setVideoLoaded(true)}
       >
-        //responsive
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="RecursosWeb/vid/hotel.mp4" type="video/mp4" />
-        </video>
-      </motion.div>
+        <source src="RecursosWeb/vid/hotel.mp4" type="video/mp4" />
+      </video>
 
       {/* Overlay con gradiente para mejorar legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/20 z-10"></div>
