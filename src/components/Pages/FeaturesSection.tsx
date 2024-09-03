@@ -43,13 +43,13 @@ const Card: React.FC<{ title: string; details: string; imageUrl: string }> = ({
   imageUrl,
 }) => {
   return (
-    <div className="relative bg-white rounded-[20px] shadow-lg overflow-hidden w-[280px] md:w-[320px] lg:w-[360px] mx-auto md:mx-2 p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+    <div className="relative bg-white rounded-xl shadow-lg overflow-hidden w-[280px] md:w-[320px] lg:w-[360px] mx-auto p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
       {/* Imagen con efecto 3D */}
       <div className="relative mb-6">
         <img
           src={imageUrl}
           alt={title}
-          className="w-[70%] mx-auto h-[100px] md:h-[120px] lg:h-[140px] object-cover rounded-[15px] transition-transform duration-500"
+          className="w-[80%] mx-auto h-[120px] md:h-[140px] lg:h-[160px] object-cover rounded-lg transition-transform duration-500"
         />
       </div>
 
@@ -104,42 +104,42 @@ const FeaturesSection: React.FC = () => {
             effect="coverflow"
             grabCursor
             centeredSlides
-            initialSlide={2} // Mostrar la tercera card de manera predefinida
-            spaceBetween={20} // Espacio entre las cards aumentado
+            initialSlide={2}
+            spaceBetween={20}
             pagination={{
               clickable: true,
               el: ".swiper-pagination",
               type: "bullets",
             }}
             autoplay={{
-              delay: 3000, // Tiempo entre cambios automáticos (3 segundos)
-              disableOnInteraction: false, // No detener autoplay al interactuar con el carrusel
+              delay: 3000,
+              disableOnInteraction: false,
             }}
             coverflowEffect={{
-              rotate: 3, // Rotación muy ligera
-              stretch: 0, // No estiramiento entre las cards
-              depth: 60, // Profundidad ligera para un efecto 3D sutil
+              rotate: 3,
+              stretch: 0,
+              depth: 60,
               modifier: 1,
-              slideShadows: false, // Sin sombras para mantener el efecto limpio
+              slideShadows: false,
             }}
             breakpoints={{
               320: {
-                slidesPerView: 1, // Mostrar una card en dispositivos móviles pequeños
+                slidesPerView: 1,
               },
               640: {
-                slidesPerView: 1, // Mostrar una card en móviles
+                slidesPerView: 1,
               },
               768: {
-                slidesPerView: 2, // Dos cards en tablets
+                slidesPerView: 2,
               },
               1024: {
-                slidesPerView: 3, // Tres cards en pantallas grandes
+                slidesPerView: 3,
               },
               1440: {
-                slidesPerView: 3, // Cuatro cards en pantallas más grandes
+                slidesPerView: 3,
               },
               1920: {
-                slidesPerView: 3, // Cinco cards en pantallas aún más grandes
+                slidesPerView: 3,
               },
             }}
             modules={[EffectCoverflow, Pagination, Autoplay]}

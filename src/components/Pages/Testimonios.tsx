@@ -38,39 +38,14 @@ const handleScrollToContact = () => {
 
 const LearningSection = () => {
   return (
-    <section className="flex flex-col-reverse lg:flex-row items-center justify-between py-20 bg-gradient-to-r from-[#F6F7F5] to-[#E8E9E7] px-4 sm:px-6 lg:px-[10%] min-h-screen">
-      {/* Tarjetas de testimonios a la izquierda en pantallas grandes */}
-      <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row lg:w-2/3">
-        {testimonials.map((testimonial) => (
-          <div
-            key={testimonial.id}
-            className="relative flex-shrink-0 w-full lg:w-full rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 bg-white"
-          >
-            <img
-              src={testimonial.image}
-              alt={testimonial.name}
-              className="w-full h-80 object-cover lg:h-auto"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col justify-end text-white">
-              <h3 className="text-xl font-semibold">{testimonial.name}</h3>
-              <div className="flex items-center mt-2">
-                {[...Array(testimonial.rating)].map((_, index) => (
-                  <FaStar key={index} className="text-yellow-500 mr-1" />
-                ))}
-              </div>
-              <p className="text-sm mt-2 italic">"{testimonial.testimonial}"</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Texto a la derecha en pantallas grandes */}
-      <div className="text-center lg:text-left lg:w-1/3 mb-12 lg:mb-0">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gloovePrimary-dark mb-6">
+    <section className="flex flex-col lg:flex-row items-center justify-between py-20 bg-gradient-to-r from-[#F6F7F5] to-[#E8E9E7] px-4 sm:px-6 lg:px-[10%] min-h-screen">
+      {/* Texto arriba en pantallas pequeñas y a la derecha en pantallas grandes */}
+      <div className="text-center lg:text-left w-full lg:w-1/3 mb-12 lg:mb-0">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gloovePrimary-dark mb-4 lg:mb-6">
           Nuestros Clientes <br />
           Confían en Nosotros.
         </h2>
-        <p className="text-lg text-glooveSecondary-dark mb-6">
+        <p className="text-base md:text-lg lg:text-xl text-glooveSecondary-dark mb-4 lg:mb-6">
           Descubre lo que nuestros clientes opinan sobre nuestros servicios de
           gestión turística.
         </p>
@@ -79,11 +54,40 @@ const LearningSection = () => {
             scale: 1.2,
             boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)",
           }}
-          className="mt-8 bg-gradient-to-r from-gloovePrimary via-gloovePrimary-dark to-glooveAccent text-white font-bold py-4 px-10 rounded-full transition duration-300 hover:scale-105 animate-pulse"
+          className="mt-6 lg:mt-8 bg-gradient-to-r from-gloovePrimary via-gloovePrimary-dark to-glooveAccent text-white font-bold py-3 px-8 rounded-full transition duration-300 hover:scale-105 animate-pulse"
           onClick={handleScrollToContact}
         >
           DESCUBRE MÁS
         </motion.button>
+      </div>
+
+      {/* Tarjetas de testimonios debajo en pantallas pequeñas y a la derecha en pantallas grandes */}
+      <div className="flex flex-col lg:flex-row lg:space-x-4 w-full lg:w-2/3 space-y-4 lg:space-y-0">
+        {testimonials.map((testimonial) => (
+          <motion.div
+            key={testimonial.id}
+            className="relative w-full lg:w-1/4 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            <img
+              src={testimonial.image}
+              alt={testimonial.name}
+              className="w-full h-48 lg:h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50 p-4 flex flex-col justify-end text-white">
+              <h3 className="text-lg font-semibold">{testimonial.name}</h3>
+              <div className="flex items-center mt-2">
+                {[...Array(testimonial.rating)].map((_, index) => (
+                  <FaStar key={index} className="text-yellow-500 mr-1" />
+                ))}
+              </div>
+              <p className="text-sm mt-2 italic">"{testimonial.testimonial}"</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

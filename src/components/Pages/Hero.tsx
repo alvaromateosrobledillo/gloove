@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
       </video>
 
       {/* Overlay con gradiente para mejorar legibilidad */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/20 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40 z-10"></div>
 
       <div className="relative text-center text-white px-4 sm:px-6 lg:px-8 z-20 flex flex-col items-center justify-center h-full">
         <motion.h1
