@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
+// Importar directamente los videos para asegurarse de que se incluyan en el bundle
+const videoRuletaO2 = require("./colaboradores/RuletaO2.mp4");
+const videoRuletaO1 = require("./colaboradores/RuletaO.mp4");
+
+const videoRuletaT = require("./colaboradores/RuletaT.mp4");
+const videoRuletaM = require("./colaboradores/RuletaM.mp4");
+
 const ResponsiveSection: React.FC = () => {
-  const [videoSrc, setVideoSrc] = useState("/dist/colaboradores/RuletaM.mp4");
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(videoRuletaM); // Video por defecto
 
   useEffect(() => {
     const updateVideoSrc = () => {
       const width = window.innerWidth;
       if (width >= 1920) {
-        setVideoSrc("/dist/colaboradores/RuletaO2.mp4"); // Monitores grandes
-        setIsLargeScreen(true);
+        setVideoSrc(videoRuletaO2); // Monitores grandes
       } else if (width >= 1024) {
-        setVideoSrc("/dist/colaboradores/RuletaO2.mp4"); // PC
-        setIsLargeScreen(true);
+        setVideoSrc(videoRuletaO1); // PC
       } else if (width >= 768) {
-        setVideoSrc("/dist/colaboradores/RuletaT.mp4"); // Tablets
-        setIsLargeScreen(false);
+        setVideoSrc(videoRuletaT); // Tablets
       } else {
-        setVideoSrc("/dist/colaboradores/RuletaM.mp4"); // Móviles
-        setIsLargeScreen(false);
+        setVideoSrc(videoRuletaM); // Móviles
       }
     };
 
@@ -31,7 +33,7 @@ const ResponsiveSection: React.FC = () => {
 
   return (
     <section className="min-h-screen bg-[#F6F7F5] flex flex-col justify-center items-center">
-      {isLargeScreen ? (
+      {window.innerWidth >= 1024 ? (
         // Layout para PC y Monitores
         <div className="grid grid-cols-3 gap-0 w-full h-screen">
           {/* Video - Ocupa 2/3 en pantallas grandes */}
