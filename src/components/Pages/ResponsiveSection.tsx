@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-// Importar directamente los videos para asegurarse de que se incluyan en el bundle
-const videoRuletaO2 = require("./colaboradores/RuletaO2.mp4");
-const videoRuletaO1 = require("./colaboradores/RuletaO.mp4");
-
-const videoRuletaT = require("./colaboradores/RuletaT.mp4");
-const videoRuletaM = require("./colaboradores/RuletaM.mp4");
-
 const ResponsiveSection: React.FC = () => {
-  const [videoSrc, setVideoSrc] = useState(videoRuletaM); // Video por defecto
+  const [videoSrc, setVideoSrc] = useState("/colaboradores/RuletaM.mp4");
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   useEffect(() => {
     const updateVideoSrc = () => {
       const width = window.innerWidth;
       if (width >= 1920) {
-        setVideoSrc(videoRuletaO2); // Monitores grandes
+        setVideoSrc("/colaboradores/RuletaO2.mp4"); // Monitores grandes
+        setIsLargeScreen(true);
       } else if (width >= 1024) {
-        setVideoSrc(videoRuletaO1); // PC
+        setVideoSrc("/colaboradores/RuletaO2.mp4"); // PC
+        setIsLargeScreen(true);
       } else if (width >= 768) {
-        setVideoSrc(videoRuletaT); // Tablets
+        setVideoSrc("/colaboradores/RuletaT.mp4"); // Tablets
+        setIsLargeScreen(false);
       } else {
-        setVideoSrc(videoRuletaM); // Móviles
+        setVideoSrc("/colaboradores/RuletaM.mp4"); // Móviles
+        setIsLargeScreen(false);
       }
     };
 
@@ -33,7 +31,7 @@ const ResponsiveSection: React.FC = () => {
 
   return (
     <section className="min-h-screen bg-[#F6F7F5] flex flex-col justify-center items-center">
-      {window.innerWidth >= 1024 ? (
+      {isLargeScreen ? (
         // Layout para PC y Monitores
         <div className="grid grid-cols-3 gap-0 w-full h-screen">
           {/* Video - Ocupa 2/3 en pantallas grandes */}
@@ -44,6 +42,7 @@ const ResponsiveSection: React.FC = () => {
               autoPlay
               muted
               loop
+              playsInline
             />
           </div>
 
@@ -98,6 +97,7 @@ const ResponsiveSection: React.FC = () => {
               autoPlay
               muted
               loop
+              playsInline
             />
           </div>
         </div>
