@@ -5,6 +5,8 @@ import { Element } from "react-scroll";
 import Loader from "./Loader";
 import Testimonials from "./Testimonios";
 import ResponsiveSection from "./ResponsiveSection";
+import MobileResponsiveSection from "./MobileResponsiveSection";
+import PCResponsiveSection from "./ResponsiveSection";
 
 // Carga diferida de los componentes menos críticos
 const Header = React.lazy(() => import("./Header"));
@@ -55,9 +57,20 @@ const Home: React.FC = () => {
             <Element name="servicios">
               <ServicesSection />
             </Element>
-
             <Element name="nosotros">
-              <ResponsiveSection />
+              {/* Componente para PC */}
+              {/* Componente para móviles y tablets */}
+              <MobileResponsiveSection />
+            </Element>
+            <Element name="nosotros">
+              {/* Componente para PC */}
+              <PCResponsiveSection />
+              {/* Componente para móviles y tablets */}
+            </Element>
+            <Element name="nosotros">
+              {/* Componente para PC */}
+              {/* Componente para móviles y tablets */}
+              <MobileResponsiveSection />
             </Element>
             <Element name="nosotros">
               <motion.section
