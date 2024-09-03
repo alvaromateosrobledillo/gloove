@@ -57,11 +57,7 @@ const Home: React.FC = () => {
             <Element name="servicios">
               <ServicesSection />
             </Element>
-            <Element name="nosotros">
-              {/* Componente para PC */}
-              {/* Componente para móviles y tablets */}
-              <MobileResponsiveSection />
-            </Element>
+
             <Element name="nosotros">
               {/* Componente para PC */}
               <PCResponsiveSection />
