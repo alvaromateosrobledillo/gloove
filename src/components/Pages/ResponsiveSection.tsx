@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const PCResponsiveSection: React.FC = () => {
-  const videoSrc = "/Colaboradores/RuletaO2.mp4"; // Ajusta esta ruta según necesites
+  const videoSrc = "RecursosWeb/vid/Colaboradores/RuletaO2.mp4"; // Ajusta esta ruta según necesites
 
   return (
     <section className="hidden lg:flex min-h-screen bg-[#F6F7F5] justify-center items-center">

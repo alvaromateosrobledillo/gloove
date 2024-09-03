@@ -32,7 +32,10 @@ const MobileResponsiveSection: React.FC = () => {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/Colaboradores/RuletaT.mp4" type="video/mp4" />
+          <source
+            src="RecursosWeb/vid//Colaboradores/RuletaT.mp4"
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
       </div>
