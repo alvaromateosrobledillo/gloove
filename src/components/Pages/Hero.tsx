@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
 import TypingEffect from "react-typing-effect";
 
 const Hero: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const controls = useAnimation();
 
   const handleScrollToContact = () => {
     const contactSection = document.getElementById("contacto");
@@ -12,14 +13,27 @@ const Hero: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      controls.start({
+        y: offset * 0.3, // Ajustamos el movimiento de desplazamiento en Y
+        opacity: 1 - offset * 0.002, // Desvanecimiento según el desplazamiento
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
+
   return (
     <section
       id="inicio"
       className="relative h-screen overflow-hidden bg-center bg-cover bg-no-repeat"
       style={{ backgroundImage: "url('/RecursosWeb/img/hotel.png')" }}
     >
-      {/* Video de fondo, visible solo cuando está listo para reproducirse */}
-      <video
+      {/* Video de fondo, con desvanecimiento */}
+      <motion.video
         autoPlay
         loop
         muted
@@ -28,14 +42,23 @@ const Hero: React.FC = () => {
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
         onCanPlayThrough={() => setVideoLoaded(true)}
+        animate={controls} // Animación en sincronía con el scroll
+        initial={{ opacity: 1 }} // Video comienza completamente visible
+        transition={{ ease: "easeOut", duration: 1 }}
       >
         <source src="RecursosWeb/vid/hotel.mp4" type="video/mp4" />
-      </video>
+      </motion.video>
 
       {/* Overlay con gradiente para mejorar legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40 z-10"></div>
 
-      <div className="relative text-center text-white px-4 sm:px-6 lg:px-8 z-20 flex flex-col items-center justify-center h-full">
+      {/* Contenido principal */}
+      <motion.div
+        className="relative text-center text-white px-4 sm:px-6 lg:px-8 z-20 flex flex-col items-center justify-center h-full"
+        animate={controls} // Animación sincronizada con el scroll
+        initial={{ y: 0, opacity: 1 }} // Comienza visible
+        transition={{ ease: "easeOut", duration: 0.8 }} // Transición suave
+      >
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,17 +88,23 @@ const Hero: React.FC = () => {
         >
           Tu gestor turístico de confianza
         </motion.p>
+
+        {/* Botón con animaciones mejoradas */}
         <motion.button
           whileHover={{
             scale: 1.2,
             boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)",
           }}
+          whileTap={{ scale: 0.9 }} // Efecto al hacer click
           className="mt-8 bg-gradient-to-r from-gloovePrimary via-gloovePrimary-dark to-glooveAccent text-white font-bold py-4 px-10 rounded-full transition duration-300 hover:scale-105 animate-pulse"
           onClick={handleScrollToContact}
+          initial={{ scale: 0.8, opacity: 0 }} // Aparece con una animación
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
         >
           DESCUBRE MÁS
         </motion.button>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -120,17 +120,21 @@ const Header = () => {
       {menuOpen && (
         <motion.div
           className="md:hidden fixed inset-0 bg-gloovePrimary-dark z-40 h-screen flex flex-col justify-center items-center px-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: -20 }} // Añadimos animación de deslizamiento
+          animate={{ opacity: 1, y: 0 }} // El menú se desliza suavemente hacia abajo
+          exit={{ opacity: 0, y: -20 }} // Al cerrarse, se desliza hacia arriba
         >
           <button
             onClick={() => setMenuOpen(false)}
             className="absolute top-4 right-4 text-white focus:outline-none"
           >
-            <XMarkIcon className="h-8 w-8 hover:text-glooveAccent transition-colors duration-200 ease-in-out transform hover:scale-110" />
+            <XMarkIcon className="h-8 w-8 hover:text-glooveAccent-light transition-colors duration-200 ease-in-out transform hover:scale-110 active:scale-95" />
           </button>
-          <nav className="w-full flex flex-col items-center space-y-6">
+
+          {/* Navegación del menú */}
+          <nav className="w-full flex flex-col items-center space-y-8">
+            {" "}
+            {/* Aumenta el espacio entre ítems */}
             {navItems.map((item, index) => (
               <ScrollLink
                 key={index}
@@ -138,11 +142,11 @@ const Header = () => {
                 smooth={true}
                 offset={-70}
                 duration={500}
-                className="w-full flex items-center justify-center text-white hover:text-glooveAccent transition duration-300 py-4 text-lg uppercase transform hover:scale-105"
+                className="w-full flex items-center justify-center text-white py-4 text-lg uppercase transform transition duration-300 hover:text-glooveAccent-light hover:scale-110"
                 onClick={() => setMenuOpen(false)}
               >
                 <motion.div
-                  whileHover={{ scale: 1.3, rotate: 10 }}
+                  whileHover={{ scale: 1.2, rotate: 5 }}
                   transition={{ duration: 0.3 }}
                   className="mr-2"
                 >
@@ -151,17 +155,22 @@ const Header = () => {
                 {item.title}
               </ScrollLink>
             ))}
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
-              }}
-              className="w-full max-w-xs flex items-center justify-center bg-gradient-to-r from-glooveAccent via-gloovePrimary-dark to-gloovePrimary text-white font-bold py-3 mt-4 rounded-full transition duration-300 hover:scale-105 animate-pulse"
-              onClick={() => setMenuOpen(false)}
-            >
-              <FaUser className="mr-2 text-xl" />
-              INICIAR SESIÓN
-            </motion.button>
+            {/* Botón de "Iniciar Sesión" */}
+            <RouterLink to="/login" className="">
+              <motion.button
+                whileHover={{
+                  scale: 1.08,
+                  boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
+                  backgroundColor: "#1c84d1", // glooveAccent dark
+                }}
+                whileTap={{ scale: 0.95 }} // Añadir feedback al hacer click
+                className="w-full max-w-xs flex items-center justify-center bg-glooveAccent-light text-white font-bold py-4 px-6 mt-6 rounded-full text-lg transition duration-300 hover:scale-105 hover:bg-glooveAccent-dark"
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaUser className="mr-3 text-2xl" />
+                INICIAR SESIÓN
+              </motion.button>
+            </RouterLink>
           </nav>
         </motion.div>
       )}
